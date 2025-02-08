@@ -169,7 +169,8 @@ const handleTimeUp = () => {
 // Get card image path
 const getCardImagePath = (card) => {
   if (!card) return '';
-  return new URL(`./assets/${card.suit}_${card.value}.png`, import.meta.url).href;
+  const baseUrl = import.meta.env.BASE_URL || '/card-game/';
+  return new URL(`${baseUrl}assets/${card.suit}_${card.value}.png`, import.meta.url).href;
 };
 
 // Add this new function after handleTimeUp

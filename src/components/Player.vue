@@ -41,6 +41,13 @@ watch(() => props.cards, (newCards) => {
     resetBidState();
   }
 }, { deep: true });
+
+// Add the getCardImagePath function
+const getCardImagePath = (card) => {
+  if (!card) return '';
+  const baseUrl = import.meta.env.BASE_URL || '/card-game/';
+  return new URL(`${baseUrl}assets/${card.suit}_${card.value}.png`, import.meta.url).href;
+};
 </script>
 
 <template>
@@ -50,7 +57,7 @@ watch(() => props.cards, (newCards) => {
       <div class="card-container">
         <div v-for="(card, index) in cards" :key="index" class="card-placeholder">
           <img v-if="card"
-               :src="`src/assets/${card.suit}_${card.value}.png`"
+               :src="getCardImagePath(card)"
                :alt="`${card.value} of ${card.suit}`"
                class="player-card" />
         </div>
